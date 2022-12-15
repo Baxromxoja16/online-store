@@ -3,15 +3,22 @@ interface windowObject {
     newURL: string,
 }
 const useRoute = {
-    route(to: string){
+    route(to: string): void{
         const app = document.querySelector("#app");
-         fetch((to === "/.html")?"main.html":to,{
+        const links = document.querySelectorAll('[route="link"]');
+         fetch((to === "/.html" || to === ".html" )?"main.html":to,{
             credentials: "include"
         }).then(req => req.text()).then(res => {
             app!.innerHTML = res;
+            links.forEach(e => {
+                e.classList.remove("route-active")
+            })
+            if( to != ".html" ) {
+                document.querySelector(`[href="#${to.replace(".html", "")}"]`)?.classList.add("route-active")
+            }
         })
     },
-    locationHashChanged() {
+    locationHashChanged(): void {
         useRoute.route(location.hash.toString().replace("#", "") + ".html" );
     }
 }
