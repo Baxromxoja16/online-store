@@ -5,14 +5,14 @@ interface windowObject {
 const useRoute = {
     route(to: string){
         const app = document.querySelector("#app");
-         fetch(to,{
+         fetch((to === "/.html")?"main.html":to,{
             credentials: "include"
         }).then(req => req.text()).then(res => {
             app!.innerHTML = res;
         })
     },
     locationHashChanged() {
-        useRoute.route(location.hash.toString().replace("#", "") );
+        useRoute.route(location.hash.toString().replace("#", "") + ".html" );
     }
 }
 
