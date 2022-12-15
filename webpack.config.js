@@ -18,10 +18,14 @@ module.exports = {
     path: path.resolve(__dirname, "dist"),
     filename: "bundle.js",
   },
-  plugins: [
-    new HtmlWebpackPlugin({
-      template: path.resolve(__dirname, "./src/pages/index.html"),
-    }),
-    new CleanWebpackPlugin(),
-  ],
+  plugins: [].concat(
+    ["index","about"].map(
+      (page) =>
+        new HtmlWebpackPlugin({
+          inject: true,
+          template: path.resolve(__dirname, `./src/pages/${page}.html`),
+          filename: `${page}.html`,
+        })
+    )
+  ),
 };

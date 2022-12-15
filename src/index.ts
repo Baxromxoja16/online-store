@@ -1,3 +1,5 @@
 import './styles/index.sass';
 import home from './scripts/home'
-console.log('Hello');
+import useRoute from './scripts/route';
+window.onhashchange = useRoute.locationHashChanged;
+console.log("route")
