@@ -18,9 +18,9 @@
         <nav>
             <h1 class="nav-logo">Online Store</h1>
             <span class="nav-score">Cart total: <span class="sum">0</span></span>
-            <div class="nav-cart">
+            <a href="#product" class="nav-cart">
                 <span class="total">0</span>
-            </div>
+            </a>
         </nav>
     </header>
     <div class="header-fr"></div>
@@ -29,7 +29,7 @@
             <div class="category filter-select">
                 <h2 class="title">Category</h2>   
                 <ul class="category-list">
-                    <li class="catergory-item">
+                    <li class="catergory-item active">
                         <input type="checkbox" id="smartphones">
                         <label for="smartphones">smartphones</label>
                     </li>
@@ -46,11 +46,11 @@
             <div class="brand filter-select">
                 <h2 class="title">Category</h2>   
                 <ul class="category-list">
-                    <li class="catergory-item">
+                    <li class="catergory-item active">
                         <input type="checkbox" id="samsung">
                         <label for="samsung">samsung</label>
                     </li>
-                    <li class="catergory-item">
+                    <li class="catergory-item active">
                         <input type="checkbox" id="apple">
                         <label for="apple">apple</label>
                     </li>
@@ -59,6 +59,32 @@
                         <label for="redmi">redmi</label>
                     </li>
                 </ul>
+            </div>
+            <div class="price filter-select">
+                <h2>Price</h2>
+                <div class="range-container">
+                    <div class="form-control">
+                        <p class="min-price">0</p> 
+                        <p class="max-price">1000$</p> 
+                    </div>
+                    <div class="price-control">
+                        <input id="fromSlider" type="range" value="0" min="0" max="1000"/>
+                        <input id="toSlider" type="range" value="1000" min="0" max="1000"/>
+                    </div>
+                </div>
+            </div>
+            <div class="stock filter-select">
+                <h2>Stock</h2>
+                <div class="range-container">
+                    <div class="form-control">
+                        <p class="min-price">0</p> 
+                        <p class="max-price">100</p> 
+                    </div>
+                    <div class="price-control">
+                        <input id="fromSlider" type="range" value="0" min="0" max="100"/>
+                        <input id="toSlider" type="range" value="100" min="0" max="100"/>
+                    </div>
+                </div>
             </div>
         </div>
         <div id="app"></div>
