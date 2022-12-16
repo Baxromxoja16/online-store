@@ -12,13 +12,55 @@
 </head>
 <body>
     <header class="nav">
-        <a route="link" href="#about">about</a>
+        <!-- <a route="link" href="#about">about</a>
         <a route="link" href="#product">product</a>
-        <a route="link" href="#/">index</a>
+        <a route="link" href="#/">index</a> -->
+        <nav>
+            <h1 class="nav-logo">Online Store</h1>
+            <span class="nav-score">Cart total: <span class="sum">0</span></span>
+            <div class="nav-cart">
+                <span class="total">0</span>
+            </div>
+        </nav>
     </header>
     <div class="header-fr"></div>
     <div class="flex">
-        <div class="left-bar"></div>
+        <div class="left-bar">
+            <div class="category filter-select">
+                <h2 class="title">Category</h2>   
+                <ul class="category-list">
+                    <li class="catergory-item">
+                        <input type="checkbox" id="smartphones">
+                        <label for="smartphones">smartphones</label>
+                    </li>
+                    <li class="catergory-item">
+                        <input type="checkbox" id="laptops">
+                        <label for="laptops">laptops</label>
+                    </li>
+                    <li class="catergory-item">
+                        <input type="checkbox" id="fragrances">
+                        <label for="fragrances">fragrances</label>
+                    </li>
+                </ul>
+            </div>
+            <div class="brand filter-select">
+                <h2 class="title">Category</h2>   
+                <ul class="category-list">
+                    <li class="catergory-item">
+                        <input type="checkbox" id="samsung">
+                        <label for="samsung">samsung</label>
+                    </li>
+                    <li class="catergory-item">
+                        <input type="checkbox" id="apple">
+                        <label for="apple">apple</label>
+                    </li>
+                    <li class="catergory-item">
+                        <input type="checkbox" id="redmi">
+                        <label for="redmi">redmi</label>
+                    </li>
+                </ul>
+            </div>
+        </div>
         <div id="app"></div>
     </div>
     
