@@ -16,7 +16,7 @@
         <a route="link" href="#product">product</a>
         <a route="link" href="#/">index</a> -->
         <nav>
-            <h1 class="nav-logo">Online Store</h1>
+            <h1 class="nav-logo"><a href="#/">Online Store</a></h1>
             <span class="nav-score">Cart total: <span class="sum">0</span></span>
             <a href="#product" class="nav-cart">
                 <span class="total">0</span>
@@ -25,7 +25,11 @@
     </header>
     <div class="header-fr"></div>
     <div class="flex">
-        <div class="left-bar">
+        <form class="left-bar">
+            <div class="rest filter-select">
+                <input type="reset" class="btn btn-rest" value="Reset Filters">
+                <button class="btn btn-copy_link">Copy link</button>
+            </div>
             <div class="category filter-select">
                 <h2 class="title">Category</h2>   
                 <ul class="category-list">
@@ -86,7 +90,7 @@
                     </div>
                 </div>
             </div>
-        </div>
+        </form>
         <div id="app"></div>
     </div>
     
