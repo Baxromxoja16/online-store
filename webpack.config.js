@@ -19,11 +19,11 @@ module.exports = {
     filename: "bundle.js",
   },
   plugins: [].concat(
-    ["index","about","product","main"].map(
+    ["index","pages/about","pages/product","pages/main"].map(
       (page) =>
         new HtmlWebpackPlugin({
           inject: true,
-          template: path.resolve(__dirname, `./src/pages/${page}.html`),
+          template: path.resolve(__dirname, `./src/${page}.html`),
           filename: `${page}.html`,
         })
     )
