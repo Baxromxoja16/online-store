@@ -1,9 +1,25 @@
-.cart-title
-    font-weight: 500
-    font-size: 48px
-    line-height: 60px
-    color: #1A4ADA
+.title
+    @include flexCenter()
+    justify-content: space-between
     margin-bottom: 32px
+    .cart-title
+        font-weight: 500
+        font-size: 48px
+        line-height: 60px
+        color: #1A4ADA
+    .items-count,
+    .pages-count
+        color: #1A4ADA
+        font-size: 20px
+        font-weight: 500
+        input
+            width: 25px
+            height: 25px
+            font-size: 18px
+            text-align: center
+            &:focus
+                outline: none
+
 .carts-main
     position: relative
     display: flex
