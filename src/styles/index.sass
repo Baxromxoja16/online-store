@@ -7,6 +7,8 @@
 body
     margin: 0
     padding: 0
+#app
+    width: 100%
 .route-active
     color: yellow
 a
@@ -24,12 +26,15 @@ a
     position: fixed
     padding: 30px 0 0
     top: 0
+    background: #fff
+    z-index: 9999
     nav
         @include flexCenter()
         justify-content: space-between
         margin: auto
         max-width: 1248px
         color: #1A4ADA
+        
         .nav-logo
             font-size: 30px
             a
@@ -64,7 +69,7 @@ a
     .left-bar
         display: flex
         flex-direction: column
-        width: 181px
+        width: 281px
         gap: 30px
         .title
             font-weight: 500

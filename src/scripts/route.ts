@@ -1,3 +1,6 @@
+interface jscode {
+    page: object
+}
 const useRoute = {
     route(to: string): void{
         const app = document.querySelector("#app");
@@ -20,5 +23,7 @@ const useRoute = {
 }
 
 useRoute.locationHashChanged()
+
+
 
 export default useRoute;
