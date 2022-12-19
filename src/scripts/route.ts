@@ -6,6 +6,7 @@ const useRoute = {
             credentials: "include"
         }).then(req => req.text()).then(res => {
             app!.innerHTML = res;
+            console.log(app);
             links.forEach(e => {
                 e.classList.remove("route-active")
             })
