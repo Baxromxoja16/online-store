@@ -8,7 +8,7 @@ module.exports = {
   module: {
     rules: [
       { test: /\.s[ac]ss$/i, use: ["style-loader", "css-loader", "sass-loader"] },
-      { test: /\.ts$/, use: "ts-loader" },
+      { test: /\.ts$/, use: "ts-loader" }
     ],
   },
   resolve: {
@@ -19,7 +19,7 @@ module.exports = {
     filename: "bundle.js",
   },
   plugins: [].concat(
-    ["index","pages/about","pages/product","pages/main"].map(
+    ["index","pages/about","pages/product","pages/main","pages/cart"].map(
       (page) =>
         new HtmlWebpackPlugin({
           inject: true,
