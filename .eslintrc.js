@@ -1,4 +1,4 @@
-{
+module.exports = {
     "root": true,
     "parser": "@typescript-eslint/parser",
     "plugins": ["prettier", "import", "@typescript-eslint"],
@@ -20,7 +20,6 @@
     },
     "rules": {
         "@typescript-eslint/no-var-requires": "error",
-        "@typescript-eslint/no-explicit-any": "any",
         "no-debugger": "off",
         "no-console": 0,
         "class-methods-use-this": "off"
