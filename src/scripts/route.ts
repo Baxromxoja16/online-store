@@ -1,3 +1,6 @@
+import useDom from "./useDom";
+
+
 interface jscode {
     page: object
 }

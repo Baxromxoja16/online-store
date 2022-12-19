@@ -3,3 +3,5 @@ const useDom = {
         return document.querySelector(elem)
     }
 }
+
+export default useDom

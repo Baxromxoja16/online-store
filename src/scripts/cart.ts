@@ -1,6 +1,6 @@
 const cart = {
     popUp(){
-        console.log(document.querySelector(".buy")!.innerHTML);
+        alert(document.querySelector(".buy")!.innerHTML);
     }
 }
 
