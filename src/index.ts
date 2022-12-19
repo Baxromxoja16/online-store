@@ -17,8 +17,12 @@ const scripts = {
                     credentials: "include"
                 }).then(req => req.json()).then(res => {
                     this.list = res;
+                    this.setList()
                 })  
             }
+        },
+        setList(){
+            document.querySelector("#list")
         }
     }
 }
