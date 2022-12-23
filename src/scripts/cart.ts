@@ -82,6 +82,7 @@ const cart = {
       const addOne = <NodeListOf<Element>>document.querySelectorAll('.btn-plus');
       const removeOne = <NodeListOf<Element>>document.querySelectorAll('.btn-minus');
       const listCount = <NodeListOf<HTMLSpanElement>>document.querySelectorAll('.list-count span');
+      const listItem = <NodeListOf<HTMLSpanElement>>document.querySelectorAll('.list-item');
 
       addOne.forEach((elem, index: number) => {
         elem?.addEventListener('click', (e) => {
@@ -95,7 +96,7 @@ const cart = {
         elem?.addEventListener('click', (e: Event) => {
           if (Number(elem.parentNode?.parentElement?.dataset.id) === Number(addCard[index].products[0].id)) {
             addCard[index].skip = Number(addCard[index].skip) - 1
-            listCount[index].innerText = `${addCard[index].skip}`
+            addCard[index].skip < 0 ? listItem[index].remove() : listCount[index].innerText = `${addCard[index].skip}`
           }
         })
       })
