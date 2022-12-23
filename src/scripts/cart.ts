@@ -31,7 +31,7 @@ const addCard: ProductItem[] = [
     products: [
       {
         id: 2,
-        title: "iPhone 9",
+        title: "iPhone 12",
         description: "An apple mobile which is nothing like apple",
         price: 5549,
         discountPercentage: 12.96,
@@ -69,7 +69,7 @@ const cart = {
     });
   },
   createLists(data: ProductItem[]): void {
-      window.addEventListener('load', (e) => {
+    window.addEventListener('load', (e) => {
         const cartList = <HTMLElement>document.querySelector('.cart-list');
 
         data.map((x, i) => {
@@ -77,10 +77,34 @@ const cart = {
         })
     })
   },
- 
+  addSkip() {
+    window.addEventListener('load', (e) => {
+      const addOne = <NodeListOf<Element>>document.querySelectorAll('.btn-plus');
+      const removeOne = <NodeListOf<Element>>document.querySelectorAll('.btn-minus');
+      const listCount = <NodeListOf<HTMLSpanElement>>document.querySelectorAll('.list-count span');
+
+      addOne.forEach((elem, index: number) => {
+        elem?.addEventListener('click', (e) => {
+          if (Number(elem.parentNode?.parentElement?.dataset.id) === Number(addCard[index].products[0].id)) {
+            addCard[index].skip = Number(addCard[index].skip) + 1
+            listCount[index].innerText = `${addCard[index].skip}`
+          }
+        })
+      })
+      removeOne.forEach((elem, index) => {
+        elem?.addEventListener('click', (e: Event) => {
+          if (Number(elem.parentNode?.parentElement?.dataset.id) === Number(addCard[index].products[0].id)) {
+            addCard[index].skip = Number(addCard[index].skip) - 1
+            listCount[index].innerText = `${addCard[index].skip}`
+          }
+        })
+      })
+    })
+  }
 };
 cart.popUp();
 cart.createLists(addCard);
+cart.addSkip();
 
 function createListElement(data: ProductItem, i: number): HTMLElement {
     // Create elements
@@ -109,6 +133,7 @@ function createListElement(data: ProductItem, i: number): HTMLElement {
     btnMinus.classList.add('btn');
     btnPlus.classList.add('btn');
 
+    listItem.setAttribute('data-id', `${data.products[0].id}`)
     image.setAttribute('src', data.products[0].images[1]);
     adress.setAttribute('href', '');
     infoName.innerText = data.products[0].title
@@ -131,6 +156,6 @@ function createListElement(data: ProductItem, i: number): HTMLElement {
     listItem.appendChild(listCount);
 
     return listItem;
-  }
+}
 
 export default cart;
