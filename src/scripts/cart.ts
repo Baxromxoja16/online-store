@@ -71,11 +71,11 @@ const cart = {
   },
   createLists(data: ProductItem[]): void {
     window.addEventListener('load', (e) => {
-        const cartList = <HTMLElement>document.querySelector('.cart-list');
-
-        data.map((x, i) => {
-            cartList.appendChild(createListElement(x, i))
-        })
+      const cartList = <HTMLElement>document.querySelector('.cart-list');
+      data.map((x, i) => {
+        cartList.appendChild(createListElement(x, i))
+        cart.totalPrice()
+      })
     })
   },
   addSkip(): void {
