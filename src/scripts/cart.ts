@@ -1,5 +1,6 @@
 import { ProductItem } from "..";
 const app = <HTMLElement>document.querySelector("#app")!;
+const navScore = <HTMLElement>document.querySelector(".nav-score .sum")!;
 const addCard: ProductItem[] = [
   {
     products: [
@@ -24,7 +25,7 @@ const addCard: ProductItem[] = [
       },
     ],
     total: 100,
-    skip: 0,
+    skip: 1,
     limit: 1,
   },
   {
@@ -50,7 +51,7 @@ const addCard: ProductItem[] = [
       },
     ],
     total: 100,
-    skip: 0,
+    skip: 1,
     limit: 2,
   },
 ];
@@ -77,7 +78,7 @@ const cart = {
         })
     })
   },
-  addSkip() {
+  addSkip(): void {
     window.addEventListener('load', (e) => {
       const addOne = <NodeListOf<Element>>document.querySelectorAll('.btn-plus');
       const removeOne = <NodeListOf<Element>>document.querySelectorAll('.btn-minus');
@@ -89,6 +90,7 @@ const cart = {
           if (Number(elem.parentNode?.parentElement?.dataset.id) === Number(addCard[index].products[0].id)) {
             addCard[index].skip = Number(addCard[index].skip) + 1
             listCount[index].innerText = `${addCard[index].skip}`
+            cart.totalPrice();
           }
         })
       })
@@ -97,15 +99,25 @@ const cart = {
           if (Number(elem.parentNode?.parentElement?.dataset.id) === Number(addCard[index].products[0].id)) {
             addCard[index].skip = Number(addCard[index].skip) - 1
             addCard[index].skip < 0 ? listItem[index].remove() : listCount[index].innerText = `${addCard[index].skip}`
+            cart.totalPrice();
           }
         })
       })
     })
+  },
+  totalPrice(): void {
+    const totalSum = <HTMLElement>app.children[2].querySelector('.total-sum span')!;
+    addCard.reduce((pr: ProductItem, cur: ProductItem): any => {
+      navScore.innerText = `${(pr.products[0].price * pr.skip) + (cur.products[0].price * cur.skip)}`
+      totalSum.innerText = `${(pr.products[0].price * pr.skip) + (cur.products[0].price * cur.skip)}`
+    });
   }
 };
 cart.popUp();
 cart.createLists(addCard);
 cart.addSkip();
+
+
 
 function createListElement(data: ProductItem, i: number): HTMLElement {
     // Create elements

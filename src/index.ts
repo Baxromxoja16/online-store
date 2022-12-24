@@ -4,7 +4,6 @@ import './styles/index.sass';
 import useRoute from './scripts/route';
 window.onhashchange = useRoute.locationHashChanged;
 
-
 const scripts = {
     main: {
         list: null, 
