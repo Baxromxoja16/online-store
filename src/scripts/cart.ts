@@ -8,7 +8,7 @@ const addCard: ProductItem[] = [
         id: 1,
         title: "iPhone 9",
         description: "An apple mobile which is nothing like apple",
-        price: 549,
+        price: 5,
         discountPercentage: 12.96,
         rating: 4.69,
         stock: 94,
@@ -34,7 +34,7 @@ const addCard: ProductItem[] = [
         id: 2,
         title: "iPhone 12",
         description: "An apple mobile which is nothing like apple",
-        price: 5549,
+        price: 6,
         discountPercentage: 12.96,
         rating: 4.69,
         stock: 94,
@@ -54,6 +54,110 @@ const addCard: ProductItem[] = [
     skip: 1,
     limit: 2,
   },
+  {
+    products: [
+      {
+        id: 3,
+        title: "iPhone 12",
+        description: "An apple mobile which is nothing like apple",
+        price: 7,
+        discountPercentage: 12.96,
+        rating: 4.69,
+        stock: 94,
+        brand: "Apple",
+        category: "smartphones",
+        thumbnail: "https://i.dummyjson.com/data/products/1/thumbnail.jpg",
+        images: [
+          "https://i.dummyjson.com/data/products/1/1.jpg",
+          "https://i.dummyjson.com/data/products/1/2.jpg",
+          "https://i.dummyjson.com/data/products/1/3.jpg",
+          "https://i.dummyjson.com/data/products/1/4.jpg",
+          "https://i.dummyjson.com/data/products/1/thumbnail.jpg",
+        ],
+      },
+    ],
+    total: 100,
+    skip: 1,
+    limit: 2,
+  },
+  {
+    products: [
+      {
+        id: 4,
+        title: "iPhone 12",
+        description: "An apple mobile which is nothing like apple",
+        price: 8,
+        discountPercentage: 12.96,
+        rating: 4.69,
+        stock: 94,
+        brand: "Apple",
+        category: "smartphones",
+        thumbnail: "https://i.dummyjson.com/data/products/1/thumbnail.jpg",
+        images: [
+          "https://i.dummyjson.com/data/products/1/1.jpg",
+          "https://i.dummyjson.com/data/products/1/2.jpg",
+          "https://i.dummyjson.com/data/products/1/3.jpg",
+          "https://i.dummyjson.com/data/products/1/4.jpg",
+          "https://i.dummyjson.com/data/products/1/thumbnail.jpg",
+        ],
+      },
+    ],
+    total: 100,
+    skip: 1,
+    limit: 2,
+  },
+  {
+    products: [
+      {
+        id: 5,
+        title: "iPhone 12",
+        description: "An apple mobile which is nothing like apple",
+        price: 9,
+        discountPercentage: 12.96,
+        rating: 4.69,
+        stock: 94,
+        brand: "Apple",
+        category: "smartphones",
+        thumbnail: "https://i.dummyjson.com/data/products/1/thumbnail.jpg",
+        images: [
+          "https://i.dummyjson.com/data/products/1/1.jpg",
+          "https://i.dummyjson.com/data/products/1/2.jpg",
+          "https://i.dummyjson.com/data/products/1/3.jpg",
+          "https://i.dummyjson.com/data/products/1/4.jpg",
+          "https://i.dummyjson.com/data/products/1/thumbnail.jpg",
+        ],
+      },
+    ],
+    total: 100,
+    skip: 1,
+    limit: 2,
+  },
+  {
+    products: [
+      {
+        id: 6,
+        title: "iPhone 12",
+        description: "An apple mobile which is nothing like apple",
+        price: 10,
+        discountPercentage: 12.96,
+        rating: 4.69,
+        stock: 94,
+        brand: "Apple",
+        category: "smartphones",
+        thumbnail: "https://i.dummyjson.com/data/products/1/thumbnail.jpg",
+        images: [
+          "https://i.dummyjson.com/data/products/1/1.jpg",
+          "https://i.dummyjson.com/data/products/1/2.jpg",
+          "https://i.dummyjson.com/data/products/1/3.jpg",
+          "https://i.dummyjson.com/data/products/1/4.jpg",
+          "https://i.dummyjson.com/data/products/1/thumbnail.jpg",
+        ],
+      },
+    ],
+    total: 100,
+    skip: 1,
+    limit: 2,
+  }
 ];
 
 const cart = {
@@ -69,32 +173,34 @@ const cart = {
       }
     });
   },
-  createLists(data: ProductItem[]): void {
-    window.addEventListener('load', (e) => {
-      const cartList = <HTMLElement>document.querySelector('.cart-list');
-      data.map((x, i) => {
-        cartList.appendChild(createListElement(x, i))
-        cart.totalPrice()
-      })
+  createLists(data: ProductItem[], val: number): void {
+    const cartList = <HTMLElement>document.querySelector('.cart-list');
+    cartList.innerHTML = '';
+    data.map((x, i) => {
+      if(i < val && x.skip > 0) {
+        cartList.appendChild(createListElement(x, i));
+      }
+      cart.totalPrice()
     })
+    cart.addSkip()
+    cart.showItems();
   },
   addSkip(): void {
-    window.addEventListener('load', (e) => {
-      const addOne = <NodeListOf<Element>>document.querySelectorAll('.btn-plus');
-      const removeOne = <NodeListOf<Element>>document.querySelectorAll('.btn-minus');
-      const listCount = <NodeListOf<HTMLSpanElement>>document.querySelectorAll('.list-count span');
-      const listItem = <NodeListOf<HTMLSpanElement>>document.querySelectorAll('.list-item');
-
-      addOne.forEach((elem, index: number) => {
-        elem?.addEventListener('click', (e) => {
-          if (Number(elem.parentNode?.parentElement?.dataset.id) === Number(addCard[index].products[0].id)) {
-            addCard[index].skip = Number(addCard[index].skip) + 1
-            listCount[index].innerText = `${addCard[index].skip}`
-            cart.totalPrice();
-          }
-        })
+    const addOne = <NodeListOf<Element>>document.querySelectorAll('.btn-plus');
+    const removeOne = <NodeListOf<Element>>document.querySelectorAll('.btn-minus');
+    const listCount = <NodeListOf<HTMLSpanElement>>document.querySelectorAll('.list-count span');
+    const listItem = <NodeListOf<HTMLSpanElement>>document.querySelectorAll('.list-item');
+    
+    addOne.forEach((elem, index: number) => {
+      elem?.addEventListener('click', (e) => {
+        if (Number(elem.parentNode?.parentElement?.dataset.id) === Number(addCard[index].products[0].id)) {
+          addCard[index].skip = Number(addCard[index].skip) + 1
+          listCount[index].innerText = `${addCard[index].skip}`
+        }
+        cart.totalPrice();
       })
-      removeOne.forEach((elem, index) => {
+    })
+    removeOne.forEach((elem, index) => {
         elem?.addEventListener('click', (e: Event) => {
           if (Number(elem.parentNode?.parentElement?.dataset.id) === Number(addCard[index].products[0].id)) {
             addCard[index].skip = Number(addCard[index].skip) - 1
@@ -102,20 +208,38 @@ const cart = {
             cart.totalPrice();
           }
         })
-      })
     })
   },
   totalPrice(): void {
     const totalSum = <HTMLElement>app.children[2].querySelector('.total-sum span')!;
-    addCard.reduce((pr: ProductItem, cur: ProductItem): any => {
-      navScore.innerText = `${(pr.products[0].price * pr.skip) + (cur.products[0].price * cur.skip)}`
-      totalSum.innerText = `${(pr.products[0].price * pr.skip) + (cur.products[0].price * cur.skip)}`
-    });
+    let sum = 0
+    for (let i = 0; i < addCard.length; i++) {
+      sum += addCard[i].products[0].price * addCard[i].skip
+      navScore.innerText = `${sum}`
+      totalSum.innerText = `${sum}`
+    }
+  },
+  showItems() {
+    const showItems = <HTMLInputElement>app.children[1].querySelector('.items-count input')
+    showItems.addEventListener('input', (e: Event) => {
+      let targetVal: string = (e.target as HTMLInputElement).value
+      let val: number =  !targetVal ? Number(showItems.value) : Number(targetVal);
+      cart.createLists(addCard, val)
+    })
+  },
+  setLocalHost(key: string, val: string): void {
+    localStorage.setItem(key, val)
+  },
+  getLocalHost(key: string): number {
+    return Number(localStorage.getItem(key));
   }
 };
 cart.popUp();
-cart.createLists(addCard);
-cart.addSkip();
+window.addEventListener('load', () => {
+  cart.createLists(addCard, 3)
+})
+
+
 
 
 

@@ -1,8 +1,11 @@
-import './scripts/cart';
+import cart from './scripts/cart';
 import './styles/index.sass';
 // import home from './scripts/home';
 import useRoute from './scripts/route';
 window.onhashchange = useRoute.locationHashChanged;
+window.addEventListener('hashchange', () => {
+    cart
+})
 
 const scripts = {
     main: {
