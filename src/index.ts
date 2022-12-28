@@ -36,7 +36,7 @@ const scripts = {
 
 useRoute.locationHashChanged(scripts);
 window.addEventListener('hashchange', () => {
-
+    useRoute.locationHashChanged(scripts);
       // cart
 })
 
