@@ -15,7 +15,7 @@ const mainScript = {
         this.list.products.forEach(e => {
             let card = document.createElement('div');
             card.classList.add('card');
-            card.setAttribute('click', `show('${e.title}')`)
+            card.setAttribute('click', `show(${e.title})`)
             card.innerHTML = ` <img src="${e.images[0]}" alt="">
             <p class="title">${e.title}</p>
             <p class="description">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Cum!</p>`

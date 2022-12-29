@@ -10,7 +10,12 @@ const scripts = {
     cart:{
         start(){
             console.log("cart loaded")
-        }
+        },
+        methods: {
+            buy(e: string){
+                console.log('clicked')
+            }
+        },
     }
 }
 

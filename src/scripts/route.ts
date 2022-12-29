@@ -11,8 +11,11 @@ const useRoute = {
             let url : string = (location.hash == '' || location.hash == '#/')?"pages/main.html":`pages/${location.hash.replace("#", '')}.html`
             document.querySelectorAll('[click]').forEach(e => {
                 let elem : string | null = e.getAttribute('click') 
-                e.addEventListener("click", ()=> {script[url.split('/')[1].split('.')[0]].methods[elem!.split("(")[0]](elem!.split("(")[1].split(")")[0])})
-                e.removeAttribute("click")
+                try{
+                    let methodsFunc = elem!.split("(")[0]
+                    e.addEventListener("click", ()=> {script[url.split('/')[1].split('.')[0]].methods[methodsFunc](elem!.split("(")[1].split(")")[0])})
+                    e.removeAttribute("click")
+                }catch(e){}
             })
         })
     },
