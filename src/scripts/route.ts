@@ -26,8 +26,7 @@ const useRoute = {
          fetch(url,{
             credentials: "include"
         }).then(req => req.text()).then(res => {
-            app!.innerHTML = res;
-            console.log(script)
+            app!.innerHTML = res;   
             script[url.split('/')[1].split('.')[0]].start()
 
             document.querySelectorAll('[click]').forEach(e => {
