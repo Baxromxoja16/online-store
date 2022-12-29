@@ -19,6 +19,7 @@ module.exports = {
         "node": true
     },
     "rules": {
+        "no-explicit-any": "on",
         "@typescript-eslint/no-var-requires": "error",
         "no-debugger": "off",
         "no-console": 0,
