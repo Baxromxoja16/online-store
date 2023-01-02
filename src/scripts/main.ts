@@ -1,6 +1,7 @@
 import useDom from "./useDom";
 
 interface prs {
+        [string : string]: string | number | string[];
         id: number;
         title: string;
         description: string;
@@ -12,10 +13,8 @@ interface prs {
         category: string;
         thumbnail: string;
         images: string[];
+        
 }[]
-interface product {
-    products: prs[] ;
-  }
   interface ine {
     title : string, 
     images : string[]
@@ -48,12 +47,14 @@ const mainScript = {
         });
     },
     methods: {
-        sort(val : string, elem : HTMLElement ){
+        sort(e : string, elem : HTMLElement ){
+            let val = e.split(";")[0]
+            let sort : string = e.split(";")[1]
             document.querySelector(".active-category")?.classList.remove('active-category')
             elem.classList.add("active-category")
             document.querySelector(".grid")!.innerHTML =  ""
             let list  = mainScript.list;
-            list = list.filter(e => (val == 'all')? e.category != '':e.category === val);
+            list = list.filter((e: {[brand : string]: string | number | string[];}) => (val == 'all')?true:e[sort] === val);
             mainScript.setList(list)
         },
         show(e:string){
