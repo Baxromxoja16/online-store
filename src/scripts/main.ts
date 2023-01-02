@@ -15,7 +15,7 @@ interface prs {
         images: string[];
         
 }[]
-  interface ine {
+ interface ine {
     title : string, 
     images : string[]
 }

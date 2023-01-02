@@ -2,20 +2,21 @@ const cart = {
   start() {
     console.log("cart loaded")
   },
+  getElement(e: string){
+    return <HTMLElement>document.querySelector(`.${e}`);
+  },
   methods: {
     buy(e: string) {
-      const popUp = document.querySelector('.pop-up_buy');
-      popUp?.classList.add('active-modal')
+      cart.getElement(e)?.classList.add('active-modal')
     },
-    closeModal() {
-      const popUp = document.querySelector('.pop-up_buy');
-      popUp?.classList.remove('active-modal')
+    closeModal(e: string) {
+      cart.getElement(e)?.classList.remove('active-modal')
     },
-    removeCount() {
-      console.log('removed');
+    deleteCount() {
+      console.log('deleted');
     },
-    addCount() {
-      console.log('added');
+    addCount(e: string) {
+      console.log('add');
     }
   },
 };
