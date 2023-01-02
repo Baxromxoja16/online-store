@@ -11,4 +11,8 @@ const scripts = {
 }
 
 
+window.addEventListener('hashchange', () => {
+    useRoute.locationHashChanged(scripts)
+})
+
 useRoute.locationHashChanged(scripts);
