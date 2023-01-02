@@ -5,7 +5,22 @@
     <div class="pages-count">Page: <input type="text" class=""></div>
 </div>
 <div class="carts-main">
-    <div class="cart-list"></div>
+    <div class="cart-list">
+        <div class="list-item" data-id="1"><span class="lists-count">1</span>
+            <div class="image">
+                <img src="https://i.dummyjson.com/data/products/1/2.jpg">
+            </div>
+            <a class="list-info" href="">
+                <h4 class="info-name">iPhone 9</h4>
+                <span class="item-price">5</span>
+            </a>
+            <div class="list-count">
+                <button click="removeCount()" class="btn-minus btn">-</button>
+                <span>1</span>
+                <button click="addCount()" class="btn-plus btn">+</button>
+            </div>
+        </div>
+    </div>
     <div class="cart-summary">
         <h4>Summary</h4>
         <p class="products-count">Products: <span>4</span></p>
@@ -16,7 +31,7 @@
     </div>
 </div>
 <div class="pop-up_buy">
-    <div class="overlay"></div>
+    <div click="closeModal()" class="overlay"></div>
     <div class="card">
         <div class="personal-details">
             <h4>Personal details</h4>

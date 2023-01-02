@@ -1,50 +1,14 @@
-import cart from './scripts/cart';
 import './styles/index.sass';
 import './styles/galery.sass'
 // import home from './scripts/home';
 import useRoute from './scripts/route';
 import main from './scripts/main';
+import cart from './scripts/cart';
 
 const scripts = {
     main,
-    cart:{
-        start(){
-            console.log("cart loaded")
-        },
-        methods: {
-            buy(e: string){
-                console.log('clicked')
-            }
-        },
-    }
+    cart
 }
 
 
 useRoute.locationHashChanged(scripts);
-window.addEventListener('hashchange', () => {
-    useRoute.locationHashChanged(scripts);
-      // cart
-})
-
-// types
-interface ProductItem {
-    products: [
-        {
-            id: number;
-            title: string;
-            description: string;
-            price: number;
-            discountPercentage: number;
-            rating: number;
-            stock: number;
-            brand: string;
-            category: string;
-            thumbnail: string;
-            images: string[];
-        }
-    ];
-    total: number;
-    skip: number;
-    limit: number;
-}[]
-export type {ProductItem}
