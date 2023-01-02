@@ -1,9 +1,5 @@
 import useDom from "./useDom";
 
-
-interface jscode {
-    page: object
-}
 const useRoute = {
     firstLoad: 0,
     startPage(script: any){
@@ -13,7 +9,9 @@ const useRoute = {
                 let elem : string | null = e.getAttribute('click') 
                 try{
                     let methodsFunc = elem!.split("(")[0]
-                    e.addEventListener("click", ()=> {script[url.split('/')[1].split('.')[0]].methods[methodsFunc](elem!.split("(")[1].split(")")[0])})
+                    e.addEventListener("click", (event)=> {
+                        script[url.split('/')[1].split('.')[0]].methods[methodsFunc](elem!.split("(")[1].split(")")[0], event.currentTarget)
+                    })
                     e.removeAttribute("click")
                 }catch(e){}
             })

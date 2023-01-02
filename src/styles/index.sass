@@ -1,6 +1,7 @@
 @import './_mixins'
 @import './_carts'
 @import './_404'
+@import './product'
 *
     font-family: 'Montserrat', sans-serif
     font-family: 'Open Sans', sans-serif
@@ -9,6 +10,8 @@
 body
     margin: 0
     padding: 0
+.flex
+    display: flex
 #app
     width: 100%
 .route-active
@@ -99,7 +102,7 @@ a
                     font-size: 16px
                     line-height: 200%
                     color: #1A4ADA
-            .active
+            .active-category
                 background: #1A4ADA
                 label
                     color: #fff

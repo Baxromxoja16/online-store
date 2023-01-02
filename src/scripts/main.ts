@@ -1,17 +1,43 @@
+import useDom from "./useDom";
+
+interface prs {
+        id: number;
+        title: string;
+        description: string;
+        price: number;
+        discountPercentage: number;
+        rating: number;
+        stock: number;
+        brand: string;
+        category: string;
+        thumbnail: string;
+        images: string[];
+}[]
+interface product {
+    products: prs[] ;
+  }
+  interface ine {
+    title : string, 
+    images : string[]
+}
+
+
+
 const mainScript = { 
-    list: {"products":[{"id":1,"title":"iPhone 9","description":"An apple mobile which is nothing like apple","price":549,"discountPercentage":12.96,"rating":4.69,"stock":94,"brand":"Apple","category":"smartphones","thumbnail":"https://i.dummyjson.com/data/products/1/thumbnail.jpg","images":["https://i.dummyjson.com/data/products/1/1.jpg","https://i.dummyjson.com/data/products/1/2.jpg","https://i.dummyjson.com/data/products/1/3.jpg","https://i.dummyjson.com/data/products/1/4.jpg","https://i.dummyjson.com/data/products/1/thumbnail.jpg"]}],"total":100,"skip":0,"limit":1}, 
+    list: [{"id":1,"title":"iPhone 9","description":"An apple mobile which is nothing like apple","price":549,"discountPercentage":12.96,"rating":4.69,"stock":94,"brand":"Apple","category":"smartphones","thumbnail":"https://i.dummyjson.com/data/products/1/thumbnail.jpg","images":["https://i.dummyjson.com/data/products/1/1.jpg","https://i.dummyjson.com/data/products/1/2.jpg","https://i.dummyjson.com/data/products/1/3.jpg","https://i.dummyjson.com/data/products/1/4.jpg","https://i.dummyjson.com/data/products/1/thumbnail.jpg"]}], 
     start(){
         this.getProducts();
     },
     getProducts(){
             fetch('https://dummyjson.com/products?limit=30',{
             }).then(req => req.json()).then(res => {
-                this.list = res;
-                this.setList()
+                this.list = res.products;
+                this.setList(res.products)
             })   
     },
-    setList(){
-        this.list.products.forEach(e => {
+    setList(list : prs[]){
+        list.forEach( val  => {
+            const e = val as ine;
             let card = document.createElement('div');
             card.classList.add('card');
             card.setAttribute('click', `show(${e.title})`)
@@ -22,11 +48,16 @@ const mainScript = {
         });
     },
     methods: {
-        sort(e : string){
-            console.log(e)
+        sort(val : string, elem : HTMLElement ){
+            document.querySelector(".active-category")?.classList.remove('active-category')
+            elem.classList.add("active-category")
+            document.querySelector(".grid")!.innerHTML =  ""
+            let list  = mainScript.list;
+            list = list.filter(e => (val == 'all')? e.category != '':e.category === val);
+            mainScript.setList(list)
         },
         show(e:string){
-            alert(e)
+            location.href = "#"
         }
     }
 }

@@ -116,10 +116,10 @@ a {
   line-height: 200%;
   color: #1A4ADA;
 }
-.flex .left-bar .category-list .active {
+.flex .left-bar .category-list .active-category {
   background: #1A4ADA;
 }
-.flex .left-bar .category-list .active label {
+.flex .left-bar .category-list .active-category label {
   color: #fff;
 }
 .flex .left-bar .rest {
