@@ -74,19 +74,28 @@ const useRoute = {
         }
     },
     getQuery(filter: string): string[] {
+        try{
         let loc : string = location.href.split("?")[1].replaceAll("%20", " ");
         let res : string[] = []
         loc.split(filter+ "=").forEach((e: string, index : number)=>{
             if(index > 0) res.push(e.split("&")[0].replace("=",""))
         })
         return res.filter(e=> e != "")
+        }catch(e){
+            return []
+        }
     },
     removeQuery(val: string): void{
         let loc :string = location.href;
         if(loc.includes(val)){
                 let rep = val + "=" +location.href.split(val+"=")[1].split("&")[0] 
-                location.href =  location.href.replace(rep + "&", "").replace(rep, "").replace("&&","&")
-                location.href = location.href.replace("&&","&")
+                if(location.href.includes("&" + rep )){
+                    location.href =  location.href.replace("&" + rep, "").replace(rep, "").replace("&&","&")
+                }else{
+                    location.href =  location.href.replace(rep + "&", "").replace(rep, "").replace("&&","&")
+                }
+                
+                location.href = location.href.replace("?&","?")
         }
     }
 }

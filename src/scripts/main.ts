@@ -22,13 +22,12 @@ interface prs {
 }[]
 
 
-const mainScript = { 
+const mainScript = {
     category: [""],
     brand: [""],
     list: [{"id":1,"title":"iPhone 9","description":"An apple mobile which is nothing like apple","price":549,"discountPercentage":12.96,"rating":4.69,"stock":94,"brand":"Apple","category":"smartphones","thumbnail":"https://i.dummyjson.com/data/products/1/thumbnail.jpg","images":["https://i.dummyjson.com/data/products/1/1.jpg","https://i.dummyjson.com/data/products/1/2.jpg","https://i.dummyjson.com/data/products/1/3.jpg","https://i.dummyjson.com/data/products/1/4.jpg","https://i.dummyjson.com/data/products/1/thumbnail.jpg"]}], 
     start(){
         this.getProducts();
-        
     },
     getProducts(){
            if(this.list.length < 2){
@@ -64,7 +63,12 @@ const mainScript = {
             <p class="title">${e.title} </p>
             <p class="price">${e.price} $</p>
             <p class="description">${e.description}</p>`
-            document.querySelector(".grid")!.appendChild(card);
+
+            if(useRoute.getQuery("search")[0] == null){
+                document.querySelector(".grid")!.appendChild(card);
+            }else if(card.innerHTML.toLocaleLowerCase().includes(useRoute.getQuery("search")[0])){
+                document.querySelector(".grid")!.appendChild(card);
+            } 
             total++
         });
         document.querySelector("#found")!.innerHTML = total.toString()
@@ -95,11 +99,17 @@ const mainScript = {
             card.setAttribute("click", `sort(${val.brand};brand)`)
             card.innerHTML = `<input type="checkbox" id="smartphones">
             <label for="smartphones">${val.brand}</label>`
-            document.querySelector(".brand-list")!.appendChild(card);
+             document.querySelector(".brand-list")!.appendChild(card);
+            
         }
         })
     },
     methods: {
+        search(e: string, elem : HTMLElement ){
+            useRoute.removeQuery("search");
+            useRoute.setQuery("search=" + (<HTMLInputElement>elem)!.value)
+            if((<HTMLInputElement>elem)!.value == "") useRoute.removeQuery("search")
+        },
         change(e: string, elem : HTMLElement){
            document.querySelector("." + elem.getAttribute("to"))!.innerHTML = (<HTMLInputElement>elem)!.value
             useRoute.removeQuery(elem.id);
