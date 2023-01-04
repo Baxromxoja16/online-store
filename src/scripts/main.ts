@@ -1,20 +1,22 @@
 import useRoute from './route';
+import cart from './cart';
 
 interface prs {
-        [string : string]: string | number | string[];
-        id: number;
-        title: string;
-        description: string;
-        price: number;
-        discountPercentage: number;
-        rating: number;
-        stock: number;
-        brand: string;
-        category: string;
-        thumbnail: string;
-        images: string[]; 
+    [string : string]: string | number | string[];
+    id: number;
+    title: string;
+    description: string;
+    price: number;
+    discountPercentage: number;
+    rating: number;
+    stock: number;
+    brand: string;
+    category: string;
+    thumbnail: string;
+    images: string[]; 
 }
-  interface ine {
+interface ine {
+    id: any;
     description: any;
     price: any;
     title : string, 
@@ -25,9 +27,15 @@ interface prs {
 const mainScript = {
     category: [""],
     brand: [""],
-    list: [{"id":1,"title":"iPhone 9","description":"An apple mobile which is nothing like apple","price":549,"discountPercentage":12.96,"rating":4.69,"stock":94,"brand":"Apple","category":"smartphones","thumbnail":"https://i.dummyjson.com/data/products/1/thumbnail.jpg","images":["https://i.dummyjson.com/data/products/1/1.jpg","https://i.dummyjson.com/data/products/1/2.jpg","https://i.dummyjson.com/data/products/1/3.jpg","https://i.dummyjson.com/data/products/1/4.jpg","https://i.dummyjson.com/data/products/1/thumbnail.jpg"]}], 
+    list: [{"id":1,"title":"iPhone 9","description":"An apple mobile which is nothing like apple","price":549,"discountPercentage":12.96,"rating":4.69,"stock":94,"brand":"Apple","category":"smartphones","thumbnail":"https://i.dummyjson.com/data/products/1/thumbnail.jpg","images":["https://i.dummyjson.com/data/products/1/1.jpg","https://i.dummyjson.com/data/products/1/2.jpg","https://i.dummyjson.com/data/products/1/3.jpg","https://i.dummyjson.com/data/products/1/4.jpg","https://i.dummyjson.com/data/products/1/thumbnail.jpg"]}],
+    cart: [{"id":1,"title":"iPhone 9","description":"An apple mobile which is nothing like apple","price":549,"discountPercentage":12.96,"rating":4.69,"stock":94,"brand":"Apple","category":"smartphones","thumbnail":"https://i.dummyjson.com/data/products/1/thumbnail.jpg","images":["https://i.dummyjson.com/data/products/1/1.jpg","https://i.dummyjson.com/data/products/1/2.jpg","https://i.dummyjson.com/data/products/1/3.jpg","https://i.dummyjson.com/data/products/1/4.jpg","https://i.dummyjson.com/data/products/1/thumbnail.jpg"]}],  
     start(){
+        if(localStorage.getItem('cart') == null){
+            localStorage.setItem("cart", "[]")
+        }
         this.getProducts();
+        this.cart = JSON.parse(localStorage.getItem('cart')  + "");
+        (document.querySelector("#copyText") as HTMLInputElement).value = location.href
     },
     getProducts(){
            if(this.list.length < 2){
@@ -52,7 +60,7 @@ const mainScript = {
                 this.methods.sortStart("category", a.concat( a1 , a2)) 
             }
     },
-    setList(list : prs[]){
+    setList(list : prs[]){  
         let total = 0;
         list.forEach( val  => {
             const e = val as ine;
@@ -62,14 +70,17 @@ const mainScript = {
             card.innerHTML = ` <img src="${e.images[0]}" alt="">
             <p class="title">${e.title} </p>
             <p class="price">${e.price} $</p>
-            <p class="description">${e.description}</p>`
-
+            <p class="description">${e.description}</p>
+            <div class="cart" click="addToCart(${e.id})"></div>`
+            
             if(useRoute.getQuery("search")[0] == null){
                 document.querySelector(".grid")!.appendChild(card);
+                total++
             }else if(card.innerHTML.toLocaleLowerCase().includes(useRoute.getQuery("search")[0])){
                 document.querySelector(".grid")!.appendChild(card);
+                total++
             } 
-            total++
+            
         });
         document.querySelector("#found")!.innerHTML = total.toString()
     },
@@ -96,16 +107,20 @@ const mainScript = {
             let card = document.createElement('li');
             card.classList.add("catergory-item");
             card.setAttribute('tag', val.brand);
-            card.setAttribute("click", `sort(${val.brand};brand)`)
+            card.setAttribute("click", `sort(${val.brand};brand)`);
             card.innerHTML = `<input type="checkbox" id="smartphones">
             <label for="smartphones">${val.brand}</label>`
-             document.querySelector(".brand-list")!.appendChild(card);
-            
+            document.querySelector(".brand-list")!.appendChild(card);
         }
         })
     },
     methods: {
-        search(e: string, elem : HTMLElement ){
+        addToCart(val: string){
+            let obj = mainScript.list.filter(e=> e.id == parseInt(val))
+            if(mainScript.cart.filter(e=> e.id == parseInt(val)).length == 0) mainScript.cart.push(obj[0])
+            localStorage.setItem("cart", JSON.stringify(mainScript.cart))
+        },
+        search(e: string, elem : HTMLElement){
             useRoute.removeQuery("search");
             useRoute.setQuery("search=" + (<HTMLInputElement>elem)!.value)
             if((<HTMLInputElement>elem)!.value == "") useRoute.removeQuery("search")
@@ -154,12 +169,27 @@ const mainScript = {
             
             mainScript.setList(list);
 
+            (document.querySelector("#copyText") as HTMLInputElement).value = location.href
+
             val.forEach(e=>{
                document.querySelector('[tag="'+e+'"]')?.classList.add("active-category")
             })
         },
         show(e:string){
            useRoute.getQuery("rand")
+        },
+        copy(e: string, elem: HTMLElement){
+
+            let copyText = document.querySelector("#copyText") as HTMLInputElement
+            elem.innerHTML = "copied to clipboard"
+            
+            copyText.select();
+            copyText.setSelectionRange(0, 99999);
+
+            navigator.clipboard.writeText(copyText.value);
+            setTimeout(()=>{
+                elem.innerHTML = "Copy link"
+            }, 2000)
         }
     }
 }

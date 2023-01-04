@@ -42,7 +42,6 @@ const useRoute = {
             script[url.split('/')[1].split('.')[0]].start()
             document.querySelectorAll('[click]').forEach(e => {
                 let elem : string | null = e.getAttribute('click') 
-
                 e.addEventListener("click", ()=> { 
                 script[url.split('/')[1].split('.')[0]].methods[elem!.split("(")[0]](elem!.split("(")[1].split(")")[0])
             })

@@ -26,7 +26,8 @@
         <form class="left-bar">
             <div class="rest filter-select">
                 <input type="reset" class="btn btn-rest"  click="sort(all)" value="Reset Filters">
-                <button class="btn btn-copy_link">Copy link</button>
+                <input type="text" id="copyText"  class="hidden" value="same text">
+                <button class="btn btn-copy_link" click="copy()">Copy link</button>
             </div>
             <input type="text" class="search" name="search" change="search()" placeholder="search" id="">
             <div class="category filter-select">
