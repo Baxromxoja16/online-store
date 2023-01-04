@@ -15,6 +15,7 @@ interface prs {
         images: string[]; 
 }
   interface ine {
+    description: any;
     price: any;
     title : string, 
     images : string[]
@@ -62,7 +63,7 @@ const mainScript = {
             card.innerHTML = ` <img src="${e.images[0]}" alt="">
             <p class="title">${e.title} </p>
             <p class="price">${e.price} $</p>
-            <p class="description">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Cum!</p>`
+            <p class="description">${e.description}</p>`
             document.querySelector(".grid")!.appendChild(card);
             total++
         });

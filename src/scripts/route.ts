@@ -20,7 +20,7 @@ const useRoute = {
                 let elem : string | null = e.getAttribute('change') 
                 try{
                 let methodsFunc = elem!.split("(")[0]
-                e.addEventListener('change', (event) => {
+                e.addEventListener('input', (event) => {
                     script[url.split('/')[1].split('.')[0]].methods[methodsFunc](elem!.split("(")[1].split(")")[0], event.currentTarget)
                 });
                 e.removeAttribute("change")
@@ -38,7 +38,6 @@ const useRoute = {
          fetch(url,{
             credentials: "include"
         }).then(req => req.text()).then(res => {
-           
             app!.innerHTML = res;   
             script[url.split('/')[1].split('.')[0]].start()
             document.querySelectorAll('[click]').forEach(e => {
@@ -64,7 +63,7 @@ const useRoute = {
             this.startPage(script)
         }
     },
-    setQuery(val: string): void{
+    setQuery(val: string): void {
         let loc :string = location.href.replaceAll("%20", " ");
         if(!loc.includes(val)){
             if(loc.includes("?")){
