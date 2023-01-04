@@ -19,7 +19,7 @@ interface prs {
   interface ine {
     title : string, 
     images : string[]
-}
+}[]
 
 
 const mainScript = { 
