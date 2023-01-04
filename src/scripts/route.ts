@@ -10,7 +10,6 @@ const useRoute = {
                 try{
                     let methodsFunc = elem!.split("(")[0]
                     e.addEventListener("click", (event)=> {
-                        console.log(url)
                         script[url.split('/')[1].split('.')[0]].methods[methodsFunc](elem!.split("(")[1].split(")")[0], event.currentTarget)
                     })
                     e.removeAttribute("click")
@@ -19,7 +18,6 @@ const useRoute = {
         })
     },
     route(a: string, script: any): void {
-        console.log(a)
         let to = a.split("?")[0] + ".html"
         to = to.replace(".html.html",".html")
         let url : string = (to === "pages//.html" || to === "pages/.html" )?"pages/main.html":to;
@@ -55,7 +53,7 @@ const useRoute = {
         }
     },
     setQuery(val: string): void{
-        let loc :string = location.href;
+        let loc :string = location.href.replaceAll("%20", " ");
         if(!loc.includes(val)){
             if(loc.includes("?")){
                 location.href += "&" + val
@@ -65,7 +63,7 @@ const useRoute = {
         }
     },
     getQuery(filter: string): string[] {
-        let loc : string = location.href.split("?")[1];
+        let loc : string = location.href.split("?")[1].replaceAll("%20", " ");
         let res : string[] = []
         loc.split(filter+ "=").forEach((e: string, index : number)=>{
             if(index > 0) res.push(e.split("&")[0].replace("=",""))

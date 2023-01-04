@@ -37,8 +37,10 @@ const mainScript = {
                 this.setList(res.products)
                 this.setCategory(res.products)
                 this.setBrands(res.products)
-                this.methods.sortStart("category", useRoute.getQuery("category")) 
-
+                let a : string[] = [];
+                let a1 :  string[] = useRoute.getQuery("category");
+                let a2 : string[] = useRoute.getQuery("brand");
+                this.methods.sortStart("category", a.concat( a1 , a2)) 
             })   
     },
     setList(list : prs[]){
@@ -46,7 +48,8 @@ const mainScript = {
             const e = val as ine;
             let card = document.createElement('div');
             card.classList.add('card');
-            card.setAttribute('click', `show(${e.title})`)
+            card.setAttribute('click', `show(${e.title})`);
+            
             card.innerHTML = ` <img src="${e.images[0]}" alt="">
             <p class="title">${e.title}</p>
             <p class="description">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Cum!</p>`
@@ -59,8 +62,9 @@ const mainScript = {
         if(!this.category.includes(val.category)){
             this.category.push(val.category)
             let card = document.createElement('li');
-            card.classList.add("catergory-item");   
+            card.classList.add("catergory-item");
             card.setAttribute("click", `sort(${val.category};category)`)
+            card.setAttribute('tag', val.category);
             card.innerHTML = `<input type="checkbox" id="smartphones">
             <label for="smartphones">${val.category}</label>`
             document.querySelector(".category-list")!.appendChild(card);
@@ -73,7 +77,8 @@ const mainScript = {
         if(!this.brand.includes(val.brand)){
             this.brand.push(val.brand)
             let card = document.createElement('li');
-            card.classList.add("catergory-item");   
+            card.classList.add("catergory-item");
+            card.setAttribute('tag', val.brand);
             card.setAttribute("click", `sort(${val.brand};brand)`)
             card.innerHTML = `<input type="checkbox" id="smartphones">
             <label for="smartphones">${val.brand}</label>`
@@ -86,29 +91,37 @@ const mainScript = {
             let val = e.split(";")[0];
             let sort : string = e.split(";")[1];
             useRoute.setQuery(sort + "=" + val)
-            if(val == 'all')document.querySelector(".active-category")?.classList.remove('active-category')
-            // elem.classList.add("active-category")
-            // document.querySelector(".grid")!.innerHTML =  ""
-            // let list  = mainScript.list;
-            // list = list.filter((e: {[brand : string]: string | number | string[];}) => (val == 'all')?true:e[sort] === val);
-            // mainScript.setList(list);
-            // let urlParams = new URLSearchParams(window.location.search);
-            // let myParam = urlParams.get('myParam');
-
+            if(val == 'all') {
+                location.href = location.href.split("?")[0].replaceAll("%20", " "); 
+                document.querySelectorAll(".active-category").forEach(e=> e.classList.remove('active-category'))
+            }
+            if(elem.className.includes("active-category") && location.href.replaceAll("%20", " ").includes("?"+ sort + "=" + val)){
+             location.href = location.href.replaceAll("%20", " ").replace(sort + "=" + val + "&","").replaceAll("%20", " ").replace("?"+sort + "=" + val ,"")
+            }
+            if(elem.className.includes("active-category")) {
+                location.href = location.href.replace("&"+sort + "=" + val.replaceAll(" ", "%20"),"")
+                elem.classList.remove("active-category")
+            }
         },
         sortStart(sort : string, val : string[]){
-           
-            
             document.querySelector(".grid")!.innerHTML =  ""
             let list  = mainScript.list;
-            list = list.filter((e: {[brand : string]: any}) : boolean => {
+            if(location.href.includes("category=")) list = list.filter((e: {[brand : string]: any}) : boolean => {
               return  val.includes(e[sort])
             });
+
+            if(location.href.includes("brand=")) list = list.filter((e: {[brand : string]: any}) : boolean => {
+                return  val.includes(e["brand"])
+            });
+
             mainScript.setList(list);
-            console.log(val)
+
+            val.forEach(e=>{
+               document.querySelector('[tag="'+e+'"]')?.classList.add("active-category")
+            })  
         },
         show(e:string){
-           console.log(useRoute.getQuery("rand"))
+           useRoute.getQuery("rand")
         }
     }
 }
