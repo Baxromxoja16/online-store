@@ -1,5 +1,6 @@
 import './styles/index.sass';
 import './styles/galery.sass'
+import './styles/_cart_pagination.sass'
 // import home from './scripts/home';
 import useRoute from './scripts/route';
 import main from './scripts/main';

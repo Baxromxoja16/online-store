@@ -5,21 +5,23 @@
     <div class="pages-count">Page: <input type="text" class=""></div>
 </div>
 <div class="carts-main">
-    <div class="cart-list">
-        <div class="list-item" data-id="1"><span class="lists-count">1</span>
-            <div class="image">
-                <img src="https://i.dummyjson.com/data/products/1/2.jpg">
+    <div>
+        <ul id="paginated-list" class="cart-list" data-current-page="1" aria-live="polite">
+
+        </ul>
+        <nav class="pagination-container">
+            <button class="pagination-button" id="prev-button" aria-label="Previous page" title="Previous page">
+              &lt;
+            </button>
+        
+            <div id="pagination-numbers">
+        
             </div>
-            <a class="list-info" href="">
-                <h4 class="info-name">iPhone 9</h4>
-                <span class="item-price">5</span>
-            </a>
-            <div class="list-count">
-                <button click="deleteCount()" class="btn-minus btn">-</button>
-                <span>1</span>
-                <button click="addCount(list-item)" class="btn-plus btn">+</button>
-            </div>
-        </div>
+        
+            <button class="pagination-button" id="next-button" aria-label="Next page" title="Next page">
+              &gt;
+            </button>
+          </nav>
     </div>
     <div class="cart-summary">
         <h4>Summary</h4>
