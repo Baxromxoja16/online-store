@@ -15,6 +15,18 @@ const useRoute = {
                     e.removeAttribute("click")
                 }catch(e){}
             })
+
+            document.querySelectorAll('[change]').forEach(e => {
+                let elem : string | null = e.getAttribute('change') 
+                try{
+                let methodsFunc = elem!.split("(")[0]
+                e.addEventListener('change', (event) => {
+                    script[url.split('/')[1].split('.')[0]].methods[methodsFunc](elem!.split("(")[1].split(")")[0], event.currentTarget)
+                });
+                e.removeAttribute("change")
+                }catch(e){}
+            })
+
         })
     },
     route(a: string, script: any): void {
@@ -69,6 +81,14 @@ const useRoute = {
             if(index > 0) res.push(e.split("&")[0].replace("=",""))
         })
         return res.filter(e=> e != "")
+    },
+    removeQuery(val: string): void{
+        let loc :string = location.href;
+        if(loc.includes(val)){
+                let rep = val + "=" +location.href.split(val+"=")[1].split("&")[0] 
+                location.href =  location.href.replace(rep + "&", "").replace(rep, "").replace("&&","&")
+                location.href = location.href.replace("&&","&")
+        }
     }
 }
 

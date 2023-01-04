@@ -18,6 +18,7 @@
         <nav>
             <h1 class="nav-logo"><a href="#/">Online Store</a></h1>
             <span class="nav-score">Cart total: $<span class="sum">0</span></span>
+            <span class="nav-score">Found: <span id="found">100</span></span>
             <a href="#cart" class="nav-cart">
                 <span class="total">0</span>
             </a>
@@ -50,8 +51,8 @@
                         <p class="max-price">1000$</p> 
                     </div>
                     <div class="price-control">
-                        <input id="fromSlider" type="range" value="0" min="0" max="1000"/>
-                        <input id="toSlider" type="range" value="1000" min="0" max="1000"/>
+                        <input change="change()" to="min-price" id="Pricefrom" type="range" value="0" min="0" max="1000"/>
+                        <input change="change()" to="max-price" id="Priceto" type="range" value="1000" min="0" max="1000"/>
                     </div>
                 </div>
             </div>
@@ -59,12 +60,12 @@
                 <h2>Stock</h2>
                 <div class="range-container">
                     <div class="form-control">
-                        <p class="min-price">0</p> 
-                        <p class="max-price">100</p> 
+                        <p class="min-price min-stock">0</p> 
+                        <p class="max-price max-stock">100</p> 
                     </div>
                     <div class="price-control">
-                        <input id="fromSlider" type="range" value="0" min="0" max="100"/>
-                        <input id="toSlider" type="range" value="100" min="0" max="100"/>
+                        <input change="change()" to="min-stock" id="Stockfrom" type="range" value="0" min="0" max="100"/>
+                        <input change="change()" to="max-stock" id="Stockto" type="range" value="100" min="0" max="100"/>
                     </div>
                 </div>
             </div>
